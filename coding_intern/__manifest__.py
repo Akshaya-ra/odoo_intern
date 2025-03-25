@@ -20,7 +20,6 @@
 ##############################################################################
 
 
-
 {
 'name': 'Training Module March 2025',
 'version': '18.0.0.0',
@@ -32,7 +31,12 @@
 'website': 'www.zbeanztech.com',
 "license": "LGPL-3",
 'depends': [],
-'data': [],
+'data': [
+    
+            'security/ir.model.access.csv',
+            'views/model_one_view.xml',
+            'views/menu.xml'
+],
 'test': [],
 'demo': [],
 'installable': True,
