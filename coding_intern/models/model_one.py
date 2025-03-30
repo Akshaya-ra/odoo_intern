@@ -12,3 +12,4 @@ class ModelOne(models.Model):
 	gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')], string="Gender")
 	active = fields.Boolean('Active')
 	description = fields.Text("Description")
+	joining = fields.Date(string="Joining")
