@@ -10,18 +10,22 @@
 			<field name="model">model.one</field>
 			<field name="arch" type="xml">
 				<form string='Model One'>
-					<field name="id" />
-					<field name="create_date" />
+					<!-- <field name="id" /> please define the fields inside grp
+					<field name="create_date" /> please define the fields inside grp -->
 					<sheet>
 						<group>
 						<group>
 							<field name="name" string="Name" />
 							<field name="age"  />
+							<field name="name" string="Display Name" />
+							<field name="age" readonly="1"  />
 							<field name="description" />
 						</group>
 						<group>
 							<field name="gender" />
-							<field name="active" />		
+							<field name="active" />	
+							<field name="create_date" />	
+							<field name="create_uid" />		
 						</group>
 					    </group>
 					</sheet>
@@ -46,6 +50,8 @@
 					<field name="description" />
 					<field name="gender" />
 					<field name="active" />	
+					<field name="create_date" />	
+					<field name="create_uid" />	
 				</list>
 			</field>
 		</record>
@@ -96,6 +102,7 @@
 				<search string='Model One'>
 					<field name="name" string="Name" />
 					<field name="age"  />
+					<field name="create_date" />
 
 					<!--Filters-->
 					<filter string="Archived" name="archived" domain="[('active', '=', False)]" />
@@ -129,13 +136,15 @@
 
 
 		<!--graph View-->
+
+		
 		<record id="view_graph_model_one" model="ir.ui.view">
 			<field name="name">model.one.graph</field>
 			<field name="model">model.one</field>
 			<field name="arch" type="xml">
 				<graph string='Model One'>
 					<field name="name" type="row" />
-					<field name="age"  type="col"/>
+					<field name="age"  type="measure"/>
 				</graph>
 			</field>
 		</record>
@@ -146,7 +155,7 @@
 			<field name="name">model.one.calendar</field>
 			<field name="model">model.one</field>
 			<field name="arch" type="xml">
-				<calendar string='Model One' date_start="joining_date" color="name" mode="month">
+				<calendar string='Model One' date_start="create_date" color="name" mode="month">
 					<field name="name" />
 					<field name="age" />
 				</calendar>

@@ -36,6 +36,7 @@
             'security/ir.model.access.csv',
             'security/security.xml',
             'views/model_one_view.xml',
+            'views/car_rental_views.xml',
             'views/menu.xml'
 ],
 'test': [],

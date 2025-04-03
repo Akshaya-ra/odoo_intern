@@ -1,1 +1,1 @@
-from . import model_one
+from . import model_one, car_rental
