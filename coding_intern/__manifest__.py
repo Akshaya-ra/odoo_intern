@@ -30,13 +30,14 @@
 'author': ' Akshaya',
 'website': 'www.zbeanztech.com',
 "license": "LGPL-3",
-'depends': [],
+'depends': ['base','sale','sale_management','account','contacts'],
 'data': [
         
             'security/ir.model.access.csv',
             'security/security.xml',
             'views/model_one_view.xml',
             'views/car_rental_views.xml',
+            'views/food_view.xml',
             'views/menu.xml'
 ],
 'test': [],

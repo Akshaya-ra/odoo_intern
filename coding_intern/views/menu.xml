@@ -5,9 +5,10 @@
 		sequence="2"/>
 
 	<!--Sub Menu-->
+
 	<menuitem id="menu_for_model_one"
 		name="models"
 		action="action_for_model_one"
-		parent='coding_intern.menu_for_sample_module'
+		parent="coding_intern.menu_for_sample_module"
  		sequence="1" />
 </odoo>
