@@ -161,7 +161,7 @@ class Food(models.Model):
     #  create_sale_order is not a valid action on food.food
 	# button name="create_sale_order" string="Create Sale Order" invisible="_sale_created == True" type="object" class="oe_highlight"/>
 	# you created a button with name = create_sale_order , but not defined that function in your model
-	# possible solutions - define that function /                  Remove the  button
+	# possible solutions - define that function / Remove the  button
 
 	def create_sale_order(self):
 			pass
@@ -246,7 +246,7 @@ def delet_the_rec(self):
 
  
 
-	# oprators 
+	# operators 
  
 
 	# = , <  ,  >   ,  =>   ,  <=  , like  , ilike  , | (or)
