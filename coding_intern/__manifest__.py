@@ -35,6 +35,7 @@
         
             'security/ir.model.access.csv',
             'security/security.xml',
+            'data/sequence.xml',
             'views/model_one_view.xml',
             'views/car_rental_views.xml',
             'views/food_view.xml',

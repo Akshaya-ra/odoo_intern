@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields , api
 
 class ModelOne(models.Model):
 	
@@ -7,6 +7,8 @@ class ModelOne(models.Model):
 
 
 	#feilds
+      
+	seq = fields.Char(string="Sequence")
 	name = fields.Char(string="Name", help='A normal name field')
 	age = fields.Integer(string="Age")
 	name = fields.Char(string="Name", help='You can add your name here', copy=False)
@@ -20,7 +22,14 @@ class ModelOne(models.Model):
 	sale_ids = fields.Many2many('sale.order','model_one_sale_rel','model_one_id','sale_id', string="Sale")
 	product_ids = fields.Many2many('product.template','model_one_product_rel','model_one_id','product_id', string="product")
 	model_one_line_ids = fields.One2many('model.one.lines', 'model_one_id', string="Product")
-
+      
+	@api.model
+	def create(self,vals):
+		vals['seq'] = self.env['ir.sequence'].next_by_code('sequence.model.one')
+		res = super (ModelOne, self).create(vals)
+		return res
+    
+ 
 class ModelOnelines(models.Model):
     _name = "model.one.lines"
     _description = "Model One lines"

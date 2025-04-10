@@ -16,6 +16,7 @@
             <sheet>
                 <group>
                     <group>
+						<field name="seq" readonly="1"/>
                         <field name="name" string="Name" />
                         <field name="age"  />
                         <field name="name" string="Display Name" />
@@ -63,6 +64,7 @@
 			<field name="model">model.one</field>
 			<field name="arch" type="xml">
 				<list string='Model One'>
+					<field name="seq"/>
 					<field name="name" string="Name" />
 					<field name="age"  />
 					<field name="description" optional="hide"/>
