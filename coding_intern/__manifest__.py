@@ -38,6 +38,7 @@
             'views/model_one_view.xml',
             'views/car_rental_views.xml',
             'views/food_view.xml',
+            'views/model_one_lines.xml',
             'views/menu.xml'
 ],
 'test': [],

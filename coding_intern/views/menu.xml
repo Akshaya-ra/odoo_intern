@@ -11,4 +11,11 @@
 		action="action_for_model_one"
 		parent="coding_intern.menu_for_sample_module"
  		sequence="1" />
+
+
+	<menuitem id="menu_model_one_lines"
+        name="Model Lines"
+        action="action_for_model_one_lines"
+        parent="coding_intern.menu_for_sample_module"
+        sequence="2" />
 </odoo>
