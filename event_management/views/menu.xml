@@ -1,0 +1,25 @@
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_event_root" name="Event Management" sequence="10"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_event" name="Events" parent="menu_event_root" sequence="20"/>
+    <menuitem id="menu_attendee" name="Attendees" parent="menu_event_root" sequence="30"/>
+
+    <!-- Actions -->
+    <record id="action_event" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="res_model">event.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_attendee" model="ir.actions.act_window">
+        <field name="name">Attendees</field>
+        <field name="res_model">event.attendee</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_event_list" parent="menu_event" action="action_event" sequence="10"/>
+    <menuitem id="menu_attendee_list" parent="menu_attendee" action="action_attendee" sequence="10"/>
+</odoo>

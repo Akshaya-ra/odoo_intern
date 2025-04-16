@@ -1,0 +1,63 @@
+<odoo>
+    <!-- Event Tree View -->
+    <record id="view_event_tree" model="ir.ui.view">
+        <field name="name">event.management.tree</field>
+        <field name="model">event.management</field>
+        <field name="arch" type="xml">
+            <tree string="Events">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="location"/>
+                <field name="attendee_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Event Form View -->
+    <record id="view_event_form" model="ir.ui.view">
+        <field name="name">event.management.form</field>
+        <field name="model">event.management</field>
+        <field name="arch" type="xml">
+            <form string="Event">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="location"/>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Attendees">
+                            <field name="attendee_ids">
+                                <tree string="Attendees" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Attendee Form View -->
+    <record id="view_attendee_form" model="ir.ui.view">
+        <field name="name">event.attendee.form</field>
+        <field name="model">event.attendee</field>
+        <field name="arch" type="xml">
+            <form string="Attendee">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="event_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
