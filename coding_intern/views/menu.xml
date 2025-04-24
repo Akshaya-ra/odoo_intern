@@ -18,4 +18,11 @@
         action="action_for_model_one_lines"
         parent="coding_intern.menu_for_sample_module"
         sequence="2" />
-</odoo>
+		
+
+	<menuitem id="menu_for_sample_wizard"
+        name="My Wizard"
+        action="action_for_sample_wizard" 
+        parent="coding_intern.menu_for_sample_module"
+        sequence="3" />	
+</odoo> 

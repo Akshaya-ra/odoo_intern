@@ -23,6 +23,26 @@ class ModelOne(models.Model):
 	product_ids = fields.Many2many('product.template','model_one_product_rel','model_one_id','product_id', string="product")
 	model_one_line_ids = fields.One2many('model.one.lines', 'model_one_id', string="Product")
       
+	
+	def helloworld(self):
+		print("hello world")
+
+	# display a wizard through button action
+
+ 
+	def show_wizard(self):
+ 
+		return {
+            'type': 'ir.actions.act_window',
+            'name': 'My Sample Wizard',
+            'res_model': 'sample.wizard',
+            'view_mode': 'form',
+            'view_id': self.env.ref('coding_intern.view_form_sample_wizard').id,
+            'target': 'new',
+			'context' : {'default_name': 'Akshaya'}
+        }	
+	
+	
 	@api.model
 	def create(self,vals):
 		vals['seq'] = self.env['ir.sequence'].next_by_code('sequence.model.one')
