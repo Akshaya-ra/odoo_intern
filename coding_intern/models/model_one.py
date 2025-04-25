@@ -22,6 +22,36 @@ class ModelOne(models.Model):
 	sale_ids = fields.Many2many('sale.order','model_one_sale_rel','model_one_id','sale_id', string="Sale")
 	product_ids = fields.Many2many('product.template','model_one_product_rel','model_one_id','product_id', string="product")
 	model_one_line_ids = fields.One2many('model.one.lines', 'model_one_id', string="Product")
+	sale_id = fields.Many2one('sale.order', string="Sales")
+	partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
+	is_special = fields.Boolean('Is Special')
+
+	def write_values(self):
+		products = self.env['product.template'].search([('list_price', '>', 200)], limit=1).id
+		order = self.env['sale.order'].search([('id', '=', 26)], limit=1).id
+		
+
+		#self.write({'product_ids' : [[6, 0, products]]})             #replace existing values with new values 
+		#self.write({'product_ids' : [[5]]})                          #unlink all records     
+		#self.write({'product_ids' : [[4, products]]})                #link valus to an existing record  
+		#self.write({'product_ids' : [[3, products]]})                #unlink a record (don't delete)  
+		#self.write({'sale_ids' : [[2, order]]})                      #unlinks and deletes the record   
+		#self.write({'product_ids' : [[0, 0, {'name': 'Test Product', 'list_price':200}]]}) 
+
+		#2.one2many fields
+
+		#self.write({'model_one_line_ids' : [[0, 0, {'name': 'Test 1', 'product_id':products, 'price': 250}]]})    
+		#line = self.model_one_line_ids.filtered(lambda l : l.price == 300).id
+		#existing_line = self.env['model.one.lines'].search([('price', '=', 300)], limit=1).id
+		ex_line = self.env['model.one.lines'].search([('model_one_id', '=', False)], limit=1).id
+		#self.write({'model_one_line_ids' : [[1, line, {'price': 350}]]}) 
+		#self.write({'model_one_line_ids' : [[2, line]]})  
+		#self.write({'model_one_line_ids' : [[3, line]]})  
+		#self.write({'model_one_line_ids' : [[4, existing_line]]})  
+		#self.write({'model_one_line_ids' : [[4, ex_line]]})  
+		self.write({'model_one_line_ids' : [[6, 0, ex_line]]})     
+ 
+		
       
 	
 	def helloworld(self):
@@ -42,7 +72,27 @@ class ModelOne(models.Model):
 			'context' : {'default_name': 'Akshaya'}
         }	
 	
-	
+    #3. @api.onchange : execute your logic when there is a change in a field
+	@api.onchange('gender')
+	def onchange_gender(self):
+		for record in self:
+			if record.gender == 'other':
+				record.is_special = True
+			else:
+				record.is_special = False
+
+
+    #2. @api.depends : define dependencies between models and fields
+	@api.depends('partner_ids')
+	def get_partner_count(self):
+		for record in self:
+			if record.partner_ids:
+				record.partner_count = len(record.partner_ids)
+			else:
+				record.partner_count = 0
+
+
+    #1. @api.model : model level operations, don't need recordsets
 	@api.model
 	def create(self,vals):
 		vals['seq'] = self.env['ir.sequence'].next_by_code('sequence.model.one')
