@@ -25,6 +25,7 @@ class ModelOne(models.Model):
 	sale_id = fields.Many2one('sale.order', string="Sales")
 	partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
 	is_special = fields.Boolean('Is Special')
+	employee_id = fields.Many2one('my.employee', string="Employee")
 
 	def write_values(self):
 		products = self.env['product.template'].search([('list_price', '>', 200)], limit=1).id
@@ -69,9 +70,25 @@ class ModelOne(models.Model):
             'view_mode': 'form',
             'view_id': self.env.ref('coding_intern.view_form_sample_wizard').id,
             'target': 'new',
-			'context' : {'default_name': 'Akshaya'}
-        }	
+			'context' : {
+				'default_name': 'Akshaya',
+				'default_dob': self.dob if hasattr(self, 'dob') else False
+				  }
+				  }
 	
+
+
+	@api.depends('dob')
+	def _compute_age(self):
+		for rec in self:
+			if rec.dob:
+				today = date.today()
+				rec.age = today.year - rec.dob.year - ((today.month, today.day) < (rec.dob.month, rec.dob.day))
+			else:
+				rec.age = 0
+
+
+
     #3. @api.onchange : execute your logic when there is a change in a field
 	@api.onchange('gender')
 	def onchange_gender(self):
@@ -80,6 +97,20 @@ class ModelOne(models.Model):
 				record.is_special = True
 			else:
 				record.is_special = False
+
+
+				def increase_age(self):
+					for record in self:
+						record.age += 1
+						
+						@api.constrains('email')
+						def check_email(self):
+							for record in self:
+								if record.email:  
+									if not isinstance(record.email, str):
+										raise ValidationError("Email must be a text value")
+									if not record.email.endswith('@gmail.com'):
+										raise ValidationError("This email doesn't end with @gmail.com. Please enter a valid email address.")
 
 
     #2. @api.depends : define dependencies between models and fields
@@ -98,6 +129,65 @@ class ModelOne(models.Model):
 		vals['seq'] = self.env['ir.sequence'].next_by_code('sequence.model.one')
 		res = super (ModelOne, self).create(vals)
 		return res
+	
+
+
+
+	#4. _sql_constraints : to set database related constraints like unique, etc.
+	
+	sql_constraints = [
+
+        ('unique_email_user', 'unique(email)', 'This email already exists. Email must be unique'),
+
+    ]
+	def change_description(self):
+		for record in self:
+			record.description = "Description added through server action"
+			
+			def send_my_email(self):
+				template = self.env.ref('sample_module.my_sample_email_template')
+				for record in self:
+					values = {'subject': 'My Custom Subject via Method'}
+					template.send_mail(record.id, force_send=True, email_values=values)
+					
+					
+					def show_sale(self):
+						return {
+
+            'type': 'ir.actions.act_window',
+
+            'name': 'Sale Order',
+
+            'res_model': 'sale.order',
+
+            'view_mode': 'list,form',
+
+            'target': 'current',
+
+            'domain': [('id', 'in', self.sale_ids.ids)]
+
+        }
+
+
+
+
+
+    # method for scheduler
+	def increase_age(self):
+		records = self.search([]) # fetch all records
+		for record in records:
+			print("age before :", record.age)
+			record.age += 1
+			print("age after :", record.age)    
+			
+			def change_description(self):
+				for record in self:
+					record.description = "Description added through server action"
+					def send_my_email(self):
+						template = self.env.ref('sample_module.my_sample_email_template')
+						for record in self:
+							values = {'subject': 'My Custom Subject via Method'}
+							template.send_mail(record.id, force_send=True, email_values=values)
     
  
 class ModelOnelines(models.Model):
