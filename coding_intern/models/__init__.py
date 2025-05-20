@@ -1,1 +1,1 @@
-from . import model_one,car_rental,food,my_employee
+from . import model_one,car_rental,food,my_employee,sale_order

@@ -26,6 +26,7 @@ class ModelOne(models.Model):
 	partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
 	is_special = fields.Boolean('Is Special')
 	employee_id = fields.Many2one('my.employee', string="Employee")
+	sale_count = fields.Integer(string="Sale Count", compute="get_sale_count")
 
 	def write_values(self):
 		products = self.env['product.template'].search([('list_price', '>', 200)], limit=1).id

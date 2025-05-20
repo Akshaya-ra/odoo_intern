@@ -4,7 +4,7 @@
 
 
 
-	<template id="sample_module_pdf_quote_temp_change" inherit_id="sale.report_saleorder_document">
+	<template id="coding_intern_pdf_quote_temp_change" inherit_id="sale.report_saleorder_document">
 
 
 			
@@ -24,3 +24,5 @@
 			</xpath>
 
 	</template>
+
+</odoo>	

@@ -1,4 +1,4 @@
-?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 
 <odoo>
@@ -16,7 +16,7 @@
 			<field name="name">Test Email Template</field>
 
 
-			<field name="model_id" ref="sample_module.model_model_one" />
+			<field name="model_id" ref="coding_intern.model_model_one" />
 
 
 			<field name="subject">Sample Email - Test Purposes</field>

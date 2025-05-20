@@ -30,7 +30,7 @@
 'author': ' Akshaya',
 'website': 'www.zbeanztech.com',
 "license": "LGPL-3",
-'depends': ['base','sale','sale_management','account','contacts','product','sale'],
+'depends': ['base','sale','sale_management','account','contacts','product','sale','report_xlsx'],
 'data': [
         
             'security/ir.model.access.csv',
